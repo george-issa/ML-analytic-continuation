@@ -6,7 +6,7 @@ This project implements a **physics-informed machine learning framework** for th
 
 ## 🔍 Overview
 
-Analytic continuation is a notoriously ill-posed problem in many-body physics. Traditional approaches like Maximum Entropy can be unstable and sensitive to noise. This project tackles the problem by:
+Analytic continuation is a notoriously ill-posed problem in many-body Condensed Matter Physics. Traditional approaches like Maximum Entropy can be unstable and sensitive to noise. This project tackles the problem by:
 
 - Learning poles and residues directly via a VAE.
 - Reconstructing spectral functions from noisy QMC Green's functions.
@@ -17,8 +17,8 @@ Analytic continuation is a notoriously ill-posed problem in many-body physics. T
 ## 🧠 Key Features
 
 - ✅ Variational Autoencoder architecture
-- ✅ Explicit pole and residue extraction
-- ✅ Supports synthetic and QMC Green's function input
+- ✅ Explicit pole and residue extraction from a learned distribution
+- ✅ Supports synthetic and QMC Green's function imaginary-time inputs
 - ✅ Modular code structure (training, evaluation, visualization)
 - ✅ Easy to extend to other continuation tasks
 
