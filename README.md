@@ -25,4 +25,53 @@ Analytic continuation is a notoriously ill-posed problem in many-body Condensed 
 ---
 
 ## 📁 Project Structure
+greens-function-analytic-continuation/
+├── README.md
+├── LICENSE
+├── requirements.txt
+├── src/                                      # Main model and training code
+│   ├── model.py                              # VAE class and architecture
+│   ├── train.py                              # training and testing
+│   ├── Green_reconstruction.py               # reconstructing poles and residues to Green's functions
+│   ├── data_process.py                       # input data processing before feeding to network
+├── synthetic-data/                           # Placeholder for input Green’s functions as sythetic data
+│   ├── half-filled-gaussian                  # Green's functions corresponding to Gaussian spectral functions
+│   ├── half-filled-lorentzian                # Green's functions corresponding to Lorentzian spectral functions
+│   ├── Green_reconstruction.py               # reconstructing poles and residues to Green's functions
+├── example-outputs/                          # Output poles, residues, plots
+│   ├── out_gaussian_numpoles1_s1e-04_xi0.5-1 
+│   ├── out_gaussian_numpoles1_s1e-04_xi0.5-1
+├── examples/             # Example usage scripts
+│   └── usage_example.py
 
+## ⚙️ Installation
+
+Clone the repository:
+git clone https://github.com/george-issa/greens-function-analytic-continuation.git
+cd greens-function-analytic-continuation
+
+Install required packages:
+pip install -r requirements.txt
+
+Or with Conda:
+conda env create -f environment.yml
+conda activate gfvae
+
+## 🚀 Usage
+
+Train a model:
+python src/train.py
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🙋 Contact
+
+For questions, discussions, or collaborations, feel free to:
+
+    Open an issue
+
+    Submit a pull request
+
+    Connect on GitHub
