@@ -25,6 +25,7 @@ Analytic continuation is a notoriously ill-posed problem in many-body Condensed 
 ---
 
 ## 📁 Project Structure
+```text
 greens-function-analytic-continuation/
 ├── README.md
 ├── LICENSE
