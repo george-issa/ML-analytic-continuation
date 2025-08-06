@@ -42,8 +42,10 @@ greens-function-analytic-continuation/
 ├── example-outputs/                          # Output poles, residues, plots
 │   ├── out_gaussian_numpoles1_s1e-04_xi0.5-1 
 │   ├── out_gaussian_numpoles1_s1e-04_xi0.5-1
-├── examples/             # Example usage scripts
+├── examples/                                 # Example usage scripts
 │   └── usage_example.py
+```
+
 
 ## ⚙️ Installation
 
