@@ -50,20 +50,28 @@ greens-function-analytic-continuation/
 ## ⚙️ Installation
 
 Clone the repository:
+```
 git clone https://github.com/george-issa/greens-function-analytic-continuation.git
 cd greens-function-analytic-continuation
+```
 
 Install required packages:
+```
 pip install -r requirements.txt
+```
 
 Or with Conda:
+```
 conda env create -f environment.yml
 conda activate gfvae
+```
 
 ## 🚀 Usage
 
 Train a model:
+```
 python src/train.py
+```
 
 ## 📄 License
 
