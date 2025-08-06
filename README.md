@@ -69,7 +69,7 @@ conda activate gfvae
 ## 🚀 Usage
 
 ### Train a model:
-Execute the train file which will load the input data and train the model defined in model.py
+Execute the train file which will load the input data and train the model defined in `model.py`
 ```
 python src/train.py
 ```
