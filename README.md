@@ -68,14 +68,14 @@ conda activate gfvae
 
 ## 🚀 Usage
 
-Train a model:
+# Train a model:
+Execute the train file which will load the input data and train the model defined in model.py
 ```
-# Execute the train file which will load the input data and train the model defined in model.py
 python src/train.py
 ```
-Visualize the results
+# Visualize the results
+Load the obtained poles and residues and plot the constructed spectral function using:
 ```
-# Load the obtained poles and residues and plot the constructed spectral function using:
 python example-outputs/spectral_poles_gaussian.py
 ```
 
