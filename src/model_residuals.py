@@ -112,10 +112,10 @@ class ModelResiduals(nn.Module):
         poles, residues = [], []
         
         # Initialize G_res as the input for the first iteration
-        G_res = G_in
+        G_res = G_in.clone()
         
-        # Initialize a loss variable to accumulate the residuals
-        loss = 0.0
+        # Initialize a G_loss variable to accumulate the residual losses
+        G_res_norms = []
         
         for _ in range(self.num_poles):
         
@@ -136,13 +136,13 @@ class ModelResiduals(nn.Module):
             hx, cx = self.rnn_cell(h, (hx, cx))
             pr = self.out_head(hx)
             
-            pole, residue = torch.chunk(pr, 2, dim=-1)
-            pole_re, pole_im = torch.chunk(pole, 2, dim=-1)
-            residue_re, residue_im = torch.chunk(residue, 2, dim=-1)
+            pole, residue           = torch.chunk(pr,       2, dim=-1)
+            pole_re, pole_im        = torch.chunk(pole,     2, dim=-1)
+            residue_re, residue_im  = torch.chunk(residue,  2, dim=-1)
             
             # Ensure poles are in the lower half-plane and residues have positive real part
-            pole_im = -1 * torch.abs(pole_im)
-            residue_re = torch.abs(residue_re)
+            pole_im     = - torch.abs(pole_im)
+            residue_re  =   torch.abs(residue_re)
             
             # Concatenate real and imaginary parts to form complex numbers
             pole = torch.complex(pole_re, pole_im)
@@ -156,11 +156,12 @@ class ModelResiduals(nn.Module):
             G_out = self.reconstruct(B, 1, self.N_t, self.tau_array, pole, residue, self.beta)
             
             # Calculate the residual Green's function
-            G_res -= G_out
+            G_res = G_res - G_out
 
-            # Update the loss with the norm of the residual Green's function
+            # Update the G_loss with the norm of the residual Green's function
             # This norm treats the tensors as vectors, summing the squares of all elements
-            loss += torch.norm(G_res, p=2)  # L2 norm of the residual
+            G_res_norm = torch.norm(G_res, p=2)  # L2 norm of the residual
+            G_res_norms.append(G_res_norm)
             
             # Stop if the residual is small enough
             if torch.norm(G_res, p=2) < self.eps:
@@ -170,10 +171,10 @@ class ModelResiduals(nn.Module):
         poles = torch.cat(poles, dim=1)         # Shape: (B, num_poles)
         residues = torch.cat(residues, dim=1)   # Shape: (B, num_poles)
         
-        # Normalize the loss
-        loss /= self.num_poles
+        # Normalize G_loss
+        G_loss = torch.stack(G_res_norms).mean()  # Mean of the norms across all poles
         
-        return mu, logvar, z, poles, residues, G_res, loss
+        return mu, logvar, z, poles, residues, G_res, G_loss
     
 if __name__ == "__main__":
     
@@ -188,7 +189,7 @@ if __name__ == "__main__":
     # mu, logvar = model.encode(G_in)
     # z = model.sample(mu, logvar)
     
-    mu, logvar, z, poles, residues, G_res, loss = model(G_in)
+    mu, logvar, z, poles, residues, G_res, G_loss = model(G_in)
     
     print("\n")
     print(f"mu shape: {mu.shape}")
